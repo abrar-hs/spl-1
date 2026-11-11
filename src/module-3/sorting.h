@@ -7,7 +7,7 @@ namespace m3 {
     using Index = std::vector<int>::size_type;
 
     namespace detail {
-        templete <typename Before>
+        template <typename Before>
         void mergeRange(std::vector<Index>& indices, std::vector<Index>& scratch, Index first, Index last, const Before& before) {
             if(last - first < 2) {
                 return;
@@ -24,7 +24,6 @@ namespace m3 {
             while(left < middle) {
                 scratch[out++] = indices[left++];
             }
-            
             while(right < last) {
                 scratch[out++] = indices[right++];
             }
@@ -32,11 +31,12 @@ namespace m3 {
                 indices[i] = scratch[i];
             }
         }
-        }
-        template <typename Before>
-        void mergeSortIndices(std::vector<Index>& indices, const Before& before) {
-            std::vector<Index> scratch(indices.size());
-            detail::mergeRange(indices, scratch, 0, indices.size(), before);
+    }
+    template <typename Before>
+    void mergeSortIndices(std::vector<Index>& indices, const Before& before) {
+        std::vector<Index> scratch(indices.size());
+        detail::mergeRange(indices, scratch, 0, indices.size(), before);
     }
 }
+
  #endif

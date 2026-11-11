@@ -1,7 +1,8 @@
 #ifndef M3_STOPWORDS_H
 #define M3_STOPWORDS_H
 
-#include "hash_map.h"
+#include <string>
+#include <vector>
 
 namespace m3 {
 class StopWords {
@@ -28,12 +29,21 @@ public:
             "why", "why's", "with", "won't", "would", "wouldn't", "you", "you'd", "you'll",
             "you're", "you've", "your", "yours", "yourself", "yourselves"
         };
-        for (const char* word : words) { words_.insert(std::string(word), true); }
+        for (const char* word : words) {
+            words_.push_back(word);
+        }
     }
-    bool contains(const std::string& token) const { return words_.contains(token); }
-    HashMap<std::string, bool>::Size size() const { return words_.size(); }
+    bool contains(const std::string& token) const {
+        for (const std::string& word : words_) {
+            if (word == token) {
+                return true;
+            }
+        }
+        return false;
+    }
+    std::vector<std::string>::size_type size() const { return words_.size(); }
 private:
-    HashMap<std::string, bool> words_;
+    std::vector<std::string> words_;
 };
 }
 

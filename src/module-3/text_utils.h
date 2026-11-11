@@ -1,11 +1,11 @@
 #ifndef M3_TEXT_UTILS_H
 #define M3_TEXT_UTILS_H
 
-include <string>
+#include <string>
 
 namespace m3 {
     bool isLetter(unsigned char c);
-    bool isDigital(unsigned char c);
+    bool isDigit(unsigned char c);
     bool isSpace(unsigned char c);
     bool isWordByte(unsigned char c);
     unsigned char toLower(unsigned char c);
